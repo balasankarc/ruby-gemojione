@@ -1,0 +1,25 @@
+Source: ruby-gemojione
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Balasankar C <balasankarc@autistici.org>
+Build-Depends: debhelper (>= 9~),
+               gem2deb,
+               rake,
+               ruby-json
+Standards-Version: 3.9.6
+Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/ruby-gemojione.git
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-ruby-extras/ruby-gemojione.git
+Homepage: http://github.com/jonathanwiesel/gemojione
+Testsuite: autopkgtest-pkg-ruby
+XS-Ruby-Versions: all
+
+Package: ruby-gemojione
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ruby | ruby-interpreter,
+         ruby-json,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: A gem for EmojiOne
+ A gem for EmojiOne
