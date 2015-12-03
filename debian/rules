@@ -3,4 +3,15 @@
 export GEM2DEB_TEST_RUNNER = --check-dependencies
 
 %:
-	dh $@ --buildsystem=ruby --with ruby
+	mkdir -p debian/build/locale
+	localedef -f UTF-8 -i en_US debian/build/locale/en_US.UTF-8
+	LOCPATH=$(CURDIR)/debian/build/locale LC_ALL=en_US.UTF-8 dh $@ --buildsystem=ruby --with ruby
+
+override_dh_clean:
+	rm -rf Gemfile.lock
+	LOCPATH=$(CURDIR)/debian/build/locale LC_ALL=en_US.UTF-8 dh_clean
+	rm -rf debian/build/
+
+override_dh_auto_install:
+	cp -vr config debian/ruby-gemojione/usr/share/ruby-gemojione/
+	dh_auto_install
