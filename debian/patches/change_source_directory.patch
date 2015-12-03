@@ -1,0 +1,35 @@
+Description: Change path to Debian specific one
+ Change the relative path used in lib and installation task file to a Debian
+ specific one where the images will be shipped by this package. 
+Author: Balasankar C <balasankarc@autistici.org>
+Last-Update: 2015-12-03
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/lib/gemojione/tasks/install.rake
++++ b/lib/gemojione/tasks/install.rake
+@@ -2,7 +2,7 @@
+   desc "Install Emoji Image Assets"
+   task :install_assets do
+     target_dir = ENV['TARGET'] ||= File.join(Rails.root, 'app/assets/images/emoji')
+-    source_dir = File.absolute_path(File.dirname(__FILE__) + '/../../../assets/images')
++    source_dir = File.absolute_path('/usr/share/ruby-gemojione/assets/images')
+ 
+     puts "===================================================================="
+     puts "= emoji image assets install"
+--- a/lib/gemojione/index.rb
++++ b/lib/gemojione/index.rb
+@@ -2,7 +2,13 @@
+   class Index
+     def initialize(emoji_list=nil)
+       emoji_list ||= begin
+-        emoji_json = File.read(File.absolute_path(File.dirname(__FILE__) + '/../../config/index.json'))
++        if File.exist?(File.absolute_path('/usr/share/ruby-gemojione/config/index.json'))
++            # For usage after installation
++            emoji_json = File.read(File.absolute_path('/usr/share/ruby-gemojione/config/index.json'))
++        else
++            # For running tests in Debian
++            emoji_json = File.read(File.absolute_path(File.dirname(__FILE__) + '../../../../../share/ruby-gemojione/config/index.json'))
++        end
+         JSON.parse(emoji_json)
+       end
+ 
