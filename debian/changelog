@@ -1,5 +1,5 @@
-ruby-gemojione (2.1.0-1) UNRELEASED; urgency=medium
+ruby-gemojione (2.1.0-1) unstable; urgency=medium
 
   * Initial release (Closes: #806937)
 
- -- Balasankar C <balasankarc@autistici.org>  Thu, 03 Dec 2015 20:26:55 +0530
+ -- Balasankar C <balasankarc@autistici.org>  Thu, 03 Dec 2015 10:16:26 +0530
